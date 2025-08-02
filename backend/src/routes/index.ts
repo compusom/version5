@@ -3,6 +3,7 @@ import clientRoutes from './clientRoutes';
 import creativeRoutes from './creativeRoutes';
 import importRoutes from './importRoutes';
 import configRoutes from './configRoutes';
+import mcpRoutes from './mcp';
 
 export const setupRoutes = (app: Application): void => {
   // API prefix
@@ -19,6 +20,9 @@ export const setupRoutes = (app: Application): void => {
 
   // Configuration routes
   app.use(`${API_PREFIX}/config`, configRoutes);
+
+  // MCP routes (Model Context Protocol + Supabase)
+  app.use(`${API_PREFIX}/mcp`, mcpRoutes);
 
   // Initial data endpoint (for app initialization)
   app.get(`${API_PREFIX}/initial-data`, async (req, res) => {

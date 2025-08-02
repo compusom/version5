@@ -8,6 +8,7 @@ import { setupRoutes } from './routes';
 import { errorHandler } from './middleware/errorHandler';
 import { rateLimiter } from './middleware/rateLimiter';
 import { initializeDatabase, closeDatabase } from './database/connection';
+import { mcpIntegrationService } from './services/mcpIntegrationService';
 import path from 'path';
 
 const app = express();
@@ -80,6 +81,14 @@ const startServer = async () => {
     // Initialize database connection
     await initializeDatabase();
     console.log('📁 Database connection established');
+
+    // Initialize MCP Integration Service
+    try {
+      await mcpIntegrationService.initializeMCP();
+      console.log('🤖 MCP Integration Service initialized');
+    } catch (mcpError) {
+      console.warn('⚠️ MCP initialization failed, continuing without MCP:', mcpError);
+    }
 
     // Start server
     const server = app.listen(config.port, () => {

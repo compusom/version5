@@ -36,5 +36,9 @@
   "workspaces": [
     "frontend",
     "backend"
-  ]
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "@supabase/supabase-js": "^2.53.0"
+  }
 }
